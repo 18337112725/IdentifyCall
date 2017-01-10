@@ -10,9 +10,9 @@
 
 @interface CallDirectoryHandler () <CXCallDirectoryExtensionContextDelegate>
 @end
-
+//拦截号码或者号码标识的情况下,号码必须要加国标区号!!!!!!!!
 @implementation CallDirectoryHandler
-
+//开始请求的方法，在打开设置-电话-来电阻止与身份识别开关时，系统自动调用
 - (void)beginRequestWithExtensionContext:(CXCallDirectoryExtensionContext *)context {
     context.delegate = self;
 
@@ -32,7 +32,7 @@
     
     [context completeRequestWithCompletionHandler:nil];
 }
-
+//添加黑名单：根据生产的模板，只需要修改CXCallDirectoryPhoneNumber数组，数组内号码要按升序排列
 - (BOOL)addBlockingPhoneNumbersToContext:(CXCallDirectoryExtensionContext *)context {
     // Retrieve phone numbers to block from data store. For optimal performance and memory usage when there are many phone numbers,
     // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
@@ -55,7 +55,7 @@
     //
     // Numbers must be provided in numerically ascending order.
     NSDictionary *peopledic = [[[NSUserDefaults alloc] initWithSuiteName:@"group.com.mh.calltest.w"] valueForKey:@"phone"];
-    
+    //号码要按升序排列
     NSArray *phone = [[peopledic allKeys]  sortedArrayUsingSelector:@selector(compare:)];
     for (NSInteger i = 0 ;i <phone.count; i++) {
         CXCallDirectoryPhoneNumber phoneNumber = [phone[i] integerValue];

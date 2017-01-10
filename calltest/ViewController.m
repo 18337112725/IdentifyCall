@@ -75,9 +75,10 @@
         }
     }];
 }
-
+//拦截号码或者号码标识的情况下,号码必须要加国标区号!!!!!!!!
 -(void)updateData:(UIButton *)sender
 {
+//    数组存放的号码和标识数组存放的标识要一一对应，号码要按升序排列(此过程在传之后统一进行了排序)，
     NSMutableDictionary *peopledic = [[NSMutableDictionary alloc] init];
     NSArray *name = @[@"IOS",@"诈骗",@"骚扰",@"IOS开发"];
     NSArray *phone = @[@"15524910212",@"8618300675120",@"8618312345654",@"8617718513625"];
